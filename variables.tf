@@ -17,7 +17,7 @@ variable "bucket_name" {
 variable "bucket_location" {
   description = "GCS bucket location"
   type        = string
-  default     = "US"
+  default     = "us-central1"
 }
 
 variable "dataset_id" {
@@ -28,7 +28,7 @@ variable "dataset_id" {
 variable "bq_location" {
   description = "BigQuery dataset location"
   type        = string
-  default     = "US"
+  default     = "us-central1"
 }
 
 variable "dataflow_sa_email" {

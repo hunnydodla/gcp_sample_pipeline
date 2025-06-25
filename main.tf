@@ -87,3 +87,49 @@ resource "google_bigquery_table" "transactions" {
     }
   ])
 }
+
+resource "google_bigquery_table" "monthly_spend_view" {
+  dataset_id = google_bigquery_dataset.pipeline_dataset.dataset_id
+  table_id   = "customer_monthly_spend"
+  deletion_protection = false
+  depends_on = [
+    google_bigquery_table.transactions
+  ]
+  view {
+    query = <<EOF
+      SELECT
+        customer_id,
+        FORMAT_TIMESTAMP('%Y-%m', transaction_time) AS year_month,
+        COUNT(*) AS transaction_count,
+        SUM(transaction_amount) AS total_spend,
+        AVG(transaction_amount) AS avg_spend
+      FROM `${var.project_id}.${google_bigquery_dataset.pipeline_dataset.dataset_id}.transactions`
+      GROUP BY customer_id, year_month
+    EOF
+    use_legacy_sql = false
+  }
+}
+
+resource "google_bigquery_table" "top_5pct_ltv_view" {
+  dataset_id = google_bigquery_dataset.pipeline_dataset.dataset_id
+  table_id   = "top_5pct_customers"
+  deletion_protection = false
+  depends_on = [
+    google_bigquery_table.transactions
+  ]
+  view {
+    query = <<EOF
+      SELECT *
+      FROM (
+        SELECT
+          customer_id,
+          SUM(transaction_amount) AS lifetime_value,
+          NTILE(20) OVER (ORDER BY SUM(transaction_amount) DESC) AS percentile
+        FROM `${var.project_id}.${google_bigquery_dataset.pipeline_dataset.dataset_id}.transactions`
+        GROUP BY customer_id
+      )
+      WHERE percentile = 1
+    EOF
+    use_legacy_sql = false
+  }
+}
