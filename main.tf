@@ -57,6 +57,12 @@ resource "google_bigquery_table" "customers" {
       mode = "REQUIRED"
     }
   ])
+  time_partitioning {
+    type  = "DAY"
+    field = "signup_date" # ✅ Partition by signup_date
+  }
+
+  clustering = ["customer_id"] # ✅ Cluster by customer_id
 }
 
 resource "google_bigquery_table" "transactions" {
@@ -84,8 +90,15 @@ resource "google_bigquery_table" "transactions" {
       name = "transaction_time"
       type = "TIMESTAMP"
       mode = "REQUIRED"
-    }
+    },
+
   ])
+  time_partitioning {
+    type  = "DAY"
+    field = "transaction_time" # Partition by transaction_time
+  }
+
+  clustering = ["customer_id"] # Cluster by customer_id
 }
 
 resource "google_bigquery_table" "monthly_spend_view" {
