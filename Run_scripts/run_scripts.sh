@@ -17,3 +17,10 @@ python3 dataflow_ingest_csv_to_bq_main.py \
  --temp_location gs://customer_analytics-bucket/tmp/dataflow \
  --runner DirectRunner \
  --setup_file ./setup.py
+
+
+  # running test cases command
+  # In cloud shell,
+  # shellcheck disable=SC2155
+  export PYTHONPATH=$(pwd)
+  pytest tests/

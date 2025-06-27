@@ -1,0 +1,3 @@
+pytest
+apache-beam[gcp]
+flake8
