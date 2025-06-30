@@ -8,7 +8,7 @@ def test_valid_customer_line():
     assert result["email"] == "john@example.com"
 
 def test_invalid_customer_line():
-    line = "invalid,data"
+    line = "invalid,21,59.4,23233-02-35"
     result = parse_and_validate_customers(line)
     assert result is None
 

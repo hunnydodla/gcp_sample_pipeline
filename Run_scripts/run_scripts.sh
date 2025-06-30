@@ -1,3 +1,5 @@
+# In cloud shell,
+
 python3 dataflow_ingest_csv_to_bq_main.py \
  --input gs://customer_analytics-bucket/data/transactions.csv \
  --output_table feisty-ceiling-462711-h4:customer_analytics.transactions \
@@ -24,3 +26,9 @@ python3 dataflow_ingest_csv_to_bq_main.py \
   # shellcheck disable=SC2155
   export PYTHONPATH=$(pwd)
   pytest tests/
+
+
+   # copy dag and main job scripts to gcp bucket
+  gsutil cp dataflow_ingest_csv_to_bq_main.py gs://customer_analytics-bucket/dags/
+  gsutil cp setup.py gs://customer_analytics-bucket/dags/
+  gsutil cp dataflow_pipeline_ingest_dag.py gs://customer_analytics-bucket/dags/

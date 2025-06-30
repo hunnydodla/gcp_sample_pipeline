@@ -1,11 +1,12 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='customer_dataflow',
+    name='gcp-dataflow-pipeline',
     version='0.1',
-    packages=find_packages(),
+    packages=find_packages(),  # This captures parse_transforms/
     install_requires=[
         'apache-beam[gcp]'
     ],
-    zip_safe=True
+    include_package_data=True,
+    zip_safe=False
 )

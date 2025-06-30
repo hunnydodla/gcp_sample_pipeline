@@ -59,10 +59,10 @@ resource "google_bigquery_table" "customers" {
   ])
   time_partitioning {
     type  = "DAY"
-    field = "signup_date" # ✅ Partition by signup_date
+    field = "signup_date" #  Partition by signup_date
   }
 
-  clustering = ["customer_id"] # ✅ Cluster by customer_id
+  clustering = ["customer_id"] #  Cluster by customer_id
 }
 
 resource "google_bigquery_table" "transactions" {
