@@ -1,5 +1,5 @@
 import csv
-
+# customer file validation
 def parse_and_validate_customers(line):
     try:
         row = next(csv.reader([line]))
@@ -13,7 +13,7 @@ def parse_and_validate_customers(line):
     except Exception as e:
         print(f"[Customer Parse Error] {e}")
         return None
-
+# transaction file validation
 def parse_and_validate_transactions(line):
     try:
         row = next(csv.reader([line]))
