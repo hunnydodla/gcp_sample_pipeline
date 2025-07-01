@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "google" {
-  credentials = file("C:/Kumar/IntelliJ_Projects/lbg/gcp_sample_pipeline/feisty-ceiling-462711-h4-ce411e66690e.json")
+  credentials = file("C:/Kumar/IntelliJ_Projects/lbg/gcp_sample_pipeline/feisty-ceiling-462711-h4-4b2f13b3b2b7.json")
   project = var.project_id
   region  = var.region
 }
