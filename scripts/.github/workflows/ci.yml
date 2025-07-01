@@ -2,7 +2,7 @@ name: Lint and Test
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, create_terraform_files_datasets_tables_buckets_in_gcp ]
   pull_request:
 
 jobs:

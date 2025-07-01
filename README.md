@@ -19,7 +19,7 @@ Views:
 ⬇
 Orchestration via Cloud Composer (Airflow DAG)
 ⬇
-Git 
+Git Commit
 
 # Setup instructions
 
@@ -124,8 +124,17 @@ WHERE percentile = 1;
 Assumptions:
 ------------
 Schema is flat (no nested fields)
-CSVs have headers and consistent formatting
+CSVs have headers and consistent data format
+Assuming daily ingest day - hence day partitioning for ingest tables
 GCS bucket, BQ dataset/table names are fixed
 Data ingestion is batch-mode, not streaming
 No PII masking or data encryption requirements beyond defaults
 Cost optimization is not yet prioritized
+
+Future Improvements:
+-------------------
+Modularize pipeline with Jenkins and docker containerization
+Add streaming support via Pub/Sub for spinnaker to deploy image between environments(Dev-INT-PRE-PRD)
+Integrate Secret Manager for credentials handling
+Data Quality check needs to be added
+Automated IAM Roles and service account creations.
