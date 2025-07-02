@@ -1,4 +1,4 @@
-# In cloud shell,
+# Run below scripts in cloud shell,
 
 python3 dataflow_ingest_csv_to_bq_main.py \
  --input gs://customer_analytics-bucket/data/transactions.csv \
